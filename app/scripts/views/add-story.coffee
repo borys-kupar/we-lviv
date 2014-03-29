@@ -28,11 +28,10 @@ define [
       e.preventDefault()
 
       @model.set( 'title' ,$( e.target ).find( "input[name=title]" ).val() )
-      @model.set( 'description' ,$( e.target ).find( "input[name=title]" ).val() )
+      @model.set( 'description' ,$( e.target ).find( "textarea[name=description]" ).val() )
 
       if @model.isValid( true )
         @model.save().then( =>
-            console.log "success"
             Backbone.history.navigate( "#admin", trigger: true )
             utils.alert( "New story was successfully added" )
         )

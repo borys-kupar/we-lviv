@@ -1,9 +1,9 @@
 define [
   'underscore'
   'backbone'
-  '../models/story-item'
+  '../models/story'
 ], (_, Backbone, StoryModel) ->
 
   class StoryItemsCollection extends Backbone.Collection
-    url : "fake.json"
+    url : "http://localhost:8000/stories"
     model: StoryModel

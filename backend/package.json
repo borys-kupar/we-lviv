@@ -1,0 +1,12 @@
+{
+  "name": "welviv-rest-api",
+  "version": "0.0.1",
+  "dependencies": {},
+  "devDependencies": {
+    "restify": "~2.6.1",
+    "mongojs": "~0.10.0"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}

@@ -28,11 +28,11 @@ define [
         $( "#content" ).html( addStoryView.render().el )
 
     editStory: ( id ) ->
-        story = new StoryModel( id: id )
+        story = new StoryModel( _id: id )
 
-        $( "#content" ).html( new EditStoryView( model: story ).render().el )
+        $( "#content" ).html( new EditStoryView( model: story ).el )
 
-        story.fetch( reset: true )
+        story.fetch()
 
     scanner: ->
         $( "#content" ).html( new ScannerView().render().el )
