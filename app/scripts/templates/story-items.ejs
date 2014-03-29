@@ -12,12 +12,12 @@
         <tr>
           <td><%= story.title %></td>
           <td>
-            <a href="#edit-story/<%= story.id %>"><i class="fa fa-edit fa-lg"></i></a>
+            <a href="#admin/edit-story/<%= story.id %>"><i class="fa fa-edit fa-lg"></i></a>
             <i class="fa fa-minus-circle fa-lg" id="<%= story.id %>"></i>
           </td>
         </tr>
         <% }); %>
       </tbody>
     </table>
-   <a href="#add-story" class="button success">Add story</a>
+   <a href="#admin/add-story" class="button success">Add story</a>
 </div>
