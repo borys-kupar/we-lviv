@@ -46,11 +46,13 @@ server.listen(port ,ip_addr, function(){
 });
 
 var PATH = '/stories'
+server.post( {path: '/login', version: '0.0.1'} , login );
 server.get ( {path: PATH, version: '0.0.1'} , findAllStories);
 server.get ( {path: PATH +'/:storyId', version: '0.0.1'} , findStory);
 server.post( {path: PATH, version: '0.0.1'} , addStory );
 server.put( {path: PATH +'/:storyId', version: '0.0.1'} , setStory );
 server.del ( {path: PATH +'/:storyId', version: '0.0.1'} , deleteStory );
+
 
 var publicProjection = {
   "$project" : {
@@ -58,6 +60,10 @@ var publicProjection = {
     "description" : 1
   }
 };
+
+function login(req, res, next) {
+    console.log(req.session);
+}
 
 function findAllStories(req, res , next) {
     res.setHeader('Access-Control-Allow-Origin','*');
