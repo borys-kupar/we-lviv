@@ -16,12 +16,16 @@ define [
 
         @listenTo( @model, "change", @render )
 
+
+
         # Backbone validation
         #
         Backbone.Validation.bind( this )
 
     render: ->
         @$el.html( @template( @model.toJSON() ) )
+        console.log @model.id
+        new QRCode(document.getElementById("qrcode"), @model.id);
 
         return this
 
@@ -30,7 +34,7 @@ define [
 
         @model.set( 'title' ,$( e.target ).find( "input[name=title]" ).val() )
         @model.set( 'description' ,$( e.target ).find( "textarea[name=description]" ).val() )
-        console.log @model
+
         if @model.isValid( true )
             @model.save().then( =>
                 Backbone.history.navigate( "#admin", trigger: true )

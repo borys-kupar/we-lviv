@@ -3,7 +3,9 @@ define [
   'underscore'
   'backbone'
   'templates'
-], ($, _, Backbone, JST) ->
+  '../core/utils'
+  '../dialog/main'
+], ($, _, Backbone, JST, utils, Dialog) ->
   class StoryItemsView extends Backbone.View
     template: JST['app/scripts/templates/story-items.ejs']
 
@@ -19,10 +21,24 @@ define [
         return this
 
      deleteStory: ( e ) ->
+
         id = $( e.target ).attr( "id" )
 
         story = @model.get( id )
 
-        story.destroy().then( =>
-            $( e.target ).parents( "tr" ).remove()
+        dialog = new Dialog(
+            title: "Are you sure you want to delete this story?"
+            body: story.get( "title" )
+            onConfirm: =>
+                story.destroy().then( =>
+                    $( e.target ).parents( "tr" ).remove()
+                )
+
+                utils.alert( "Story was successfully deleted" )
+
+                dialog.close()
         )
+
+        dialog.open()
+
+

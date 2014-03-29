@@ -15,13 +15,28 @@ require.config
       deps: [
         "backbone"
       ]
+    "modernizr":
+      exports: 'Modernizr'
+    "foundation":
+      deps: [
+        "jquery"
+        "modernizr"
+      ]
+      exports: "Foundation"
+    "foundation.reveal":
+      deps: [
+        "foundation"
+      ]
   paths:
     'jquery': '../bower_components/jquery/dist/jquery'
     'backbone': '../bower_components/backbone/backbone'
     'backbone-validation': '../bower_components/backbone-validation/dist/backbone-validation-amd'
     'underscore': '../bower_components/underscore/underscore'
     'localStorage': '../bower_components/backbone.localStorage/backbone.localStorage'
-
+    'qrcode': 'vendor/qrcode'
+    "modernizr": "../bower_components/modernizr/modernizr"
+    "foundation": "../bower_components/foundation/js/foundation/foundation"
+    "foundation.reveal": "../bower_components/foundation/js/foundation/foundation.reveal"
 
 require [
   'jquery'
@@ -29,7 +44,9 @@ require [
   'routes/main'
   'backbone-validation'
   'localStorage'
-], ( $, Backbone, Router , Validation, LocalStorage ) ->
+  'qrcode'
+  'foundation.reveal'
+], ( $, Backbone, Router , Validation, LocalStorage, qrcode, foundationReveal ) ->
 
   # Add custom backbone validation methods
   #

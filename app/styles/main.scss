@@ -17,6 +17,22 @@
     "foundation/scss/foundation/components/pagination",
     "foundation/scss/foundation/components/alert-boxes";
 
+@media print {
+    header, .edit-form, .titles {
+        display: none;
+    }
+    /*.qr-code-print {
+        width: 400px;
+        height: auto;
+    }*/
+}
+
+.titles{
+    a {
+        color: #b4b4b4;
+    }
+}
+
 #navigation{
     height: rem-calc(50);
     background: #333333;
@@ -26,6 +42,7 @@
         color : #ffffff;
         font-size: rem-calc(20);
     }
+    font-family: 'Lato', sans-serif;
 }
 
 #container {
@@ -42,8 +59,23 @@
 table {
     .fa-minus-circle {
         color: $deleteColor;
+        cursor: pointer;
     }
     .fa-edit {
         color: #cedb00;
+        cursor: pointer;
     }
 }
+
+.qr-code-print {
+    img {
+        margin: 0 auto;
+    }
+    p {
+        display: block;
+        text-align: center;
+        font-size: rem-calc(20);
+    }
+
+}
+

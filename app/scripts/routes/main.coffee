@@ -4,9 +4,10 @@ define [
   '../views/add-story'
   '../views/edit-story'
   '../views/scanner'
+  '../views/admin-header'
   '../models/story'
   '../collections/story-items'
-], ( Backbone, StoryCollectionView, AddStoryView, EditStoryView, ScannerView, StoryModel, StoryCollection ) ->
+], ( Backbone, StoryCollectionView, AddStoryView, EditStoryView, ScannerView, AdminHeaderView, StoryModel, StoryCollection ) ->
   class MainRouter extends Backbone.Router
     routes:
         "": "scanner"
@@ -18,6 +19,7 @@ define [
     adminPage: ->
         storyCollection = new StoryCollection()
 
+        $( ".header-placement" ).html( new AdminHeaderView().render().el )
         $( "#content" ).html( new StoryCollectionView( model: storyCollection ).el )
 
         storyCollection.fetch( reset: true )
@@ -25,14 +27,17 @@ define [
     addStory: ->
         addStoryView = new AddStoryView()
 
+        $( ".header-placement" ).html( new AdminHeaderView().render().el )
         $( "#content" ).html( addStoryView.render().el )
 
     editStory: ( id ) ->
         story = new StoryModel( _id: id )
 
+        $( ".header-placement" ).html( new AdminHeaderView().render().el )
         $( "#content" ).html( new EditStoryView( model: story ).el )
 
         story.fetch()
 
     scanner: ->
+        $( ".header-placement" ).empty()
         $( "#content" ).html( new ScannerView().render().el )

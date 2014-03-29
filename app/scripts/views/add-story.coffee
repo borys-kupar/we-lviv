@@ -32,7 +32,7 @@ define [
 
       if @model.isValid( true )
         @model.save().then( =>
-            Backbone.history.navigate( "#admin", trigger: true )
+            Backbone.history.navigate( "#admin/edit-story/" + @model.id, trigger: true )
             utils.alert( "New story was successfully added" )
         )
 
