@@ -314,6 +314,7 @@ module.exports = function (grunt) {
             return grunt.task.run([
                 'clean:server',
                 'coffee',
+                'compass:server',
                 'createDefaultTemplate',
                 'jst',
                 'connect:test',
@@ -326,6 +327,7 @@ module.exports = function (grunt) {
             'coffee:dist',
             'createDefaultTemplate',
             'jst',
+            'compass:server',
             'connect:livereload',
             'open',
             'watch'
