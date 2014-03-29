@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+@import "settings";
+@import "foundation/scss/normalize";
+
+// Include some Foundation components
+// You can see complete component list in bower_components/foundation/scss/foundation.scss
+@import
+    "foundation/scss/foundation/components/block-grid",
+    "foundation/scss/foundation/components/grid",
+    "foundation/scss/foundation/components/tables",
+    "foundation/scss/foundation/components/reveal",
+    "foundation/scss/foundation/components/buttons",
+    "foundation/scss/foundation/components/type",
+    "foundation/scss/foundation/components/forms",
+    "foundation/scss/foundation/components/tooltips",
+    "foundation/scss/foundation/components/pagination",
+    "foundation/scss/foundation/components/alert-boxes";
+
+.class{
+    color : blue;
+}
