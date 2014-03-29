@@ -16,6 +16,25 @@
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
+        <!-- build:js scripts/vendor/jsqrcode.js -->
+        <script type="text/javascript" src="scripts/vendor/qr-scan/grid.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/version.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/detector.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/formatinf.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/errorlevel.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/bitmat.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/datablock.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/bmparser.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/datamask.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/rsdecoder.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/gf256poly.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/gf256.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/decoder.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/qrcode.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/findpat.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/alignpat.js"></script>
+        <script type="text/javascript" src="scripts/vendor/qr-scan/databr.js"></script>
+        <!-- endbuild -->
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -36,7 +55,88 @@
           </ul>
         </div>
 
-        <button class="button">BUTTON</button>
+        <button id="screenshot-button">Scan QR code</button>
+        <button id="screenshot-stop-button">Stop</button>
+        <video autoplay></video>
+        <img src="" id="screenshot">
+        <canvas id="qr-canvas" width="640" height="480"></canvas>
+
+        <script type="text/javascript">
+            var onFailSoHard = function(e) {
+                console.log('Reeeejected!', e);
+            };
+
+            function hasGetUserMedia() {
+              // Note: Opera builds are unprefixed.
+              return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+                        navigator.mozGetUserMedia || navigator.msGetUserMedia);
+            }
+
+            if (hasGetUserMedia()) {
+                var video = document.querySelector('video');
+                var canvas = document.querySelector('canvas');
+                var button = document.querySelector('#screenshot-button');
+                var img = document.querySelector('#screenshot');
+                var ctx = canvas.getContext('2d');
+                var localMediaStream = null;
+
+                function sizeCanvas() {
+                  // video.onloadedmetadata not firing in Chrome. See crbug.com/110938.
+                  setTimeout(function() {
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    img.height = video.videoHeight;
+                    img.width = video.videoWidth;
+                  }, 50);
+                }
+
+                function snapshot() {
+                  if (localMediaStream) {
+                    ctx.drawImage(video, 0, 0);
+                    // "image/webp" works in Chrome 18. In other browsers, this will fall back to image/png.
+                    document.querySelector('img').src = canvas.toDataURL('image/webp');
+                  }
+                }
+
+
+                button.addEventListener('click', function(e) {
+                      if (localMediaStream) {
+                        snapshot();
+                        return;
+                      }
+
+                    if (navigator.getUserMedia) {
+                        navigator.getUserMedia('video', function(stream) {
+                          video.src = stream;
+                          localMediaStream = stream;
+                          sizeCanvas();
+                          button.textContent = 'Take Shot';
+                        }, onFailSoHard);
+                    } else if (navigator.webkitGetUserMedia) {
+                        navigator.webkitGetUserMedia('video', function(stream) {
+                          video.src = window.webkitURL.createObjectURL(stream);
+                          localMediaStream = stream;
+                          sizeCanvas();
+                          button.textContent = 'Take Shot';
+                        }, onFailSoHard);
+                      } else {
+                        onFailSoHard({target: video});
+                      }
+                }, false);
+
+                video.addEventListener('click', snapshot, false);
+
+                document.querySelector('#screenshot-stop-button').addEventListener('click', function(e) {
+                  video.pause();
+                  localMediaStream.stop(); // Doesn't do anything in Chrome.
+                }, false);
+
+
+            } else {
+              alert('getUserMedia() is not supported in your browser');
+            }
+        </script>
+
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
