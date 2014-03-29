@@ -23,6 +23,35 @@ body {
     background-color: white;
 }
 
+@media print {
+    header, .edit-form, .titles {
+        display: none;
+    }
+    /*.qr-code-print {
+        width: 400px;
+        height: auto;
+    }*/
+}
+
+.titles{
+    a {
+        color: #b4b4b4;
+    }
+}
+
+.qr-code-print {
+    img {
+        margin: 0 auto;
+    }
+    p {
+        display: block;
+        text-align: center;
+        font-size: rem-calc(20);
+    }
+
+}
+
+
 .logo {
     width: 212px;
     height: 239px;
@@ -207,8 +236,10 @@ select.ua {
 table {
     .fa-minus-circle {
         color: $deleteColor;
+        cursor: pointer;
     }
     .fa-edit {
         color: #cedb00;
+        cursor: pointer;
     }
 }
