@@ -34,6 +34,6 @@ define [
         @model.save().then( =>
             console.log "success"
             Backbone.history.navigate( "#admin", trigger: true )
-            utils.alert( "New user was successfully added" )
+            utils.alert( "New story was successfully added" )
         )
 
