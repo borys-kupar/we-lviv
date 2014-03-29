@@ -55,7 +55,7 @@ $column-gutter: rem-calc(30);
 $total-columns: 12;
 
 // We use these to control various global styles
-$body-bg: #e1e1e1;
+$body-bg: #ffffff;
 // $body-font-color: #222;
 $body-font-family: "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $body-font-weight: normal;
@@ -939,19 +939,18 @@ $pagination-link-current-active-bg: #005ba8;
 
 // These control the background color for the table and even rows
 // $table-bg: #fff;
-$table-even-row-bg: #f3f3f3;
+//$table-even-row-bg: #f3f3f3;
 
 // These control the table cell border style
 // $table-border-style: solid;
-$table-border-size: 0;
+//$table-border-size: 0;
 // $table-border-color: #ddd;
 
 // These control the table head styles
-$table-head-bg: $mainColorActive;
+//$table-head-bg: $mainColorActive;
 // $table-head-font-size: rem-calc(14);
-$table-head-font-color: #fff;
-$table-head-font-weight: normal;
-$table-head-padding: rem-calc(4 10 4);
+//$table-head-font-weight: normal;
+//$table-head-padding: rem-calc(4 10 4);
 
 // These control the row padding and font styles
 // $table-row-padding: rem-calc(9 10);

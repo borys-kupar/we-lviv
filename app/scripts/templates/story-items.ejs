@@ -1,0 +1,23 @@
+<div id="story-items">
+   <h3><i class="fa fa-book"></i> Stories</h3>
+   <table>
+      <thead>
+        <tr>
+          <th width="900px">Story title</th>
+          <th width="100px">Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% _.each(collection, function(story) { %>
+        <tr>
+          <td><%= story.title %></td>
+          <td>
+            <a href="#edit-story/<%= story.id %>"><i class="fa fa-edit fa-lg"></i></a>
+            <i class="fa fa-minus-circle fa-lg" id="<%= story.id %>"></i>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+   <a href="#add-story" class="button success">Add story</a>
+</div>

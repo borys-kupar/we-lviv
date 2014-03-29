@@ -17,6 +17,33 @@
     "foundation/scss/foundation/components/pagination",
     "foundation/scss/foundation/components/alert-boxes";
 
-.class{
-    color : blue;
+#navigation{
+    height: rem-calc(50);
+    background: #333333;
+    padding: rem-calc(10 0);
+
+    .main-title {
+        color : #ffffff;
+        font-size: rem-calc(20);
+    }
+}
+
+#container {
+    padding: rem-calc( 30 0 );
+}
+
+.messages {
+    .columns {
+        padding: 0;
+        margin-top: rem-calc(20);
+    }
+}
+
+table {
+    .fa-minus-circle {
+        color: $deleteColor;
+    }
+    .fa-edit {
+        color: #cedb00;
+    }
 }
