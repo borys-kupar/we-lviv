@@ -3,7 +3,8 @@ define [
   'underscore'
   'backbone'
   'templates'
-], ($, _, Backbone, JST) ->
+  '../core/utils'
+], ($, _, Backbone, JST, utils) ->
   class EditStoryView extends Backbone.View
     template: JST['app/scripts/templates/edit-story.ejs']
 
@@ -13,7 +14,7 @@ define [
     initialize: ( params )->
         @model = params.model
 
-        @listenToOnce( @model, "reset", @render )
+        @listenTo( @model, "change", @render )
 
         # Backbone validation
         #
@@ -25,13 +26,13 @@ define [
         return this
 
     saveStory: ( e ) ->
-      e.preventDefault()
+        e.preventDefault()
 
-      @model.set( 'title' ,$( e.target ).find( "input[name=title]" ).val() )
-      @model.set( 'description' ,$( e.target ).find( "input[name=title]" ).val() )
-
-      if @model.isValid( true )
-        @model.save().then( =>
-            Backbone.history.navigate( "#admin", trigger: true )
-            utils.alert( "Story was successfully edited" )
-        )
+        @model.set( 'title' ,$( e.target ).find( "input[name=title]" ).val() )
+        @model.set( 'description' ,$( e.target ).find( "textarea[name=description]" ).val() )
+        console.log @model
+        if @model.isValid( true )
+            @model.save().then( =>
+                Backbone.history.navigate( "#admin", trigger: true )
+                utils.alert( "Story was successfully edited" )
+            )

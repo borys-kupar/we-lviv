@@ -23,4 +23,6 @@ define [
 
         story = @model.get( id )
 
-        story.destroy()
+        story.destroy().then( =>
+            $( e.target ).parents( "tr" ).remove()
+        )

@@ -5,11 +5,12 @@ define [
   'use strict';
 
   class StoryModel extends Backbone.Model
+      urlRoot: "http://localhost:8000/stories"
 
-        localStorage: new Backbone.LocalStorage("SomeCollection")
+      idAttribute: "_id"
 
-        validation:
-            title:
-                required: true
-            description:
-                required: true
+      validation:
+          title:
+              required: true
+          description:
+              required: true
