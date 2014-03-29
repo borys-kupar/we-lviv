@@ -17,6 +17,140 @@
     "foundation/scss/foundation/components/pagination",
     "foundation/scss/foundation/components/alert-boxes";
 
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-image: url("../images/top_sec_map_bg.jpg");
+    background-color: white;
+}
+
+.logo {
+    width: 212px;
+    height: 239px;
+    background-image: url("../images/logo.png");
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+p.post_text {
+    font-family: 'Roboto Slab', serif;/*FONT FOR BODY OF POST*/
+}
+
+/*ICONS*/
+i.search_white {
+    background-image: url("../images/icons_sprite.png");
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+    background-position: 0 0;
+}
+i.qr_code_icon {
+    background-image: url("../images/icons_sprite.png");
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+    background-position: -32px 0;
+}
+.red_btn i.qr_code_icon, .blue_btn i.search_white {
+    margin-bottom: -7px;
+    margin-right: 20px;
+}
+i.back_arrow_btn {
+    background-image: url("../images/icons_sprite.png");
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+    background-position: -96px 0;
+}
+i.fb_icon {
+    background-image: url("../images/icons_sprite.png");
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+    background-position: -64px -32px;
+}
+a:hover i.fb_icon {
+    background-position: -96px -32px;
+}
+i.tw_icon {
+    background-image: url("../images/icons_sprite.png");
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+    background-position: 0 -32px;
+}
+a:hover i.tw_icon {
+    background-position: -32px -32px;
+}
+/* END OFICONS*/
+
+/*BUTTONS*/
+select#white_select {
+    font-size: 24px;
+    color: #a2a2a2;
+    font-weight: bold;
+    border: 2px solid #c4c4c4;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 4px 10px 4px 60px;
+    width: 100%;
+    background-position: left -4px;
+    height: auto;
+    line-height: 32px;
+}
+select.en {
+    background-image: url("../images/en_flag.png");
+    background-repeat: no-repeat;
+}
+select.ua {
+    background-image: url("../images/ua_flag.png");
+    background-repeat: no-repeat;
+}
+
+.red_btn {
+    background-color: #de4437;
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    width: 100%;
+    padding: 8px 10px;
+    display: block;
+    margin-bottom: 16px;
+}
+.red_btn:hover {
+    color: #fff;
+    transition: all 0.3s ease 0s;
+    background-color: #cc372a;
+    cursor: pointer;
+}
+.blue_btn {
+    background-color: #3bafda;
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    width: 100%;
+    padding: 8px 10px;
+    display: block;
+}
+.blue_btn:hover {
+    color: #fff;
+    transition: all 0.3s ease 0s;
+    background-color: #2697c1;
+    cursor: pointer;
+}
+.blue_btn span, .red_btn span {
+    display: inline-block;
+    width: 75%;
+    text-align: center;
+}
+/*END OF BUTTONS*/
+
 #navigation{
     height: rem-calc(50);
     background: #333333;
@@ -28,16 +162,34 @@
     }
 }
 
-#container {
-    padding: rem-calc( 30 10 );
-}
-
-
 .scanner-view {
+    .buttons {
+        padding: 20px;
+        background-image: url("../images/buttons_bg.jpg");
+    }
+
+    .scanner-header {
+        text-align: center;
+
+        p {
+            width: 250px;
+            font-size: 13px;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+    }
+
     .canvas-wrap {
         width: 100%;
         height: 20px;
         overflow: hidden;
+    }
+
+    video {
+        width: 100%;
+        height: 319px;
+        display: none;
     }
 
     canvas {

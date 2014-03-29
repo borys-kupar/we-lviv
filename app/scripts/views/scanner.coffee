@@ -12,6 +12,7 @@ define [
     events:
         'click #screenshot-button': 'scan'
         'click video': 'snapshot'
+        'change select': 'changeLanguage'
 
     initialize: ->
         if typeof MediaStreamTrack is undefined
@@ -36,10 +37,13 @@ define [
                         { sourceId: @cameraId }
                     ]
             }, (stream) =>
+                @$( ".scanner-header" ).hide()
+                @$( "video" ).show()
+
                 @video.src = stream
                 @localMediaStream = stream
                 @sizeCanvas()
-                @button.text('Take Shot')
+                @button.find('span').text('Take a shot')
             , @onFailSoHard )
         else if navigator.webkitGetUserMedia
             navigator.webkitGetUserMedia( {
@@ -48,10 +52,13 @@ define [
                         { sourceId: @cameraId }
                     ]
             }, (stream) =>
+                @$( ".scanner-header" ).hide()
+                @$( "video" ).show()
+
                 @video.src = window.webkitURL.createObjectURL(stream)
                 @localMediaStream = stream
                 @sizeCanvas()
-                @button.text('Take Shot')
+                @button.find('span').text('Take a shot')
             , @onFailSoHard )
         else
             onFailSoHard({target: video})
@@ -113,3 +120,6 @@ define [
         @ctx             = @canvas.getContext('2d')
 
         return this
+
+    changeLanguage: (e) ->
+        @$( 'select' ).attr('class', $(e.target).val() )

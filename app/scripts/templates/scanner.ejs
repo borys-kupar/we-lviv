@@ -1,8 +1,15 @@
-<video autoplay style="width: 100%; height: 300px; border: 1px solid black"></video>
-<button id="screenshot-button">Scan QR code</button>
-<select name="language">
-    <option value="en">English</option>
-    <option value="ua">Ukrainian</option>
-</select>
-<a class="button" href="#stories">Search for Story</a>
-<div class="canvas-wrap"><canvas id="qr-canvas"></canvas></div>
+<div class="scanner-header">
+    <div class="logo"></div>
+    <p>Scan QR-codes around the city. Read short stories of inhabitants and points of interest.</p>
+</div>
+
+<video autoplay></video>
+<div class="buttons">
+    <a class="red_btn" id="screenshot-button"><i class="qr_code_icon"></i><span>Scan QR-code</span></a>
+    <select name="language" id="white_select" class="en">
+        <option value="en">English</option>
+        <option value="ua">Ukrainian</option>
+    </select>
+    <a href="#stories" class="blue_btn"><i class="search_white"></i><span>Search for Story</span></a>
+    <div class="canvas-wrap"><canvas id="qr-canvas"></canvas></div>
+</div>
