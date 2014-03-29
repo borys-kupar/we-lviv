@@ -5,6 +5,7 @@ define [
   'templates'
 ], ($, _, Backbone, JST) ->
   class ScannerView extends Backbone.View
+    className: "scanner-view"
     template: JST['app/scripts/templates/scanner.ejs']
     cameraId: null
 
@@ -70,10 +71,16 @@ define [
         return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia)
 
     decode: ->
-        qrcode.decode()
+        try
+            qrcode.decode()
+            # Doesn't do anything in Chrome.
+            @localMediaStream.stop()
+        catch e
+            alert "Can't read qr code. Please try to scan code again."
+            @video.play()
 
     decodeQRCodeCallback: (data) ->
-        alert data
+        Backbone.history.navigate( "stories/" + data )
 
     sizeCanvas: ->
         # video.onloadedmetadata not firing in Chrome. See crbug.com/110938.
@@ -91,8 +98,6 @@ define [
             # @$('img').attr('src', @canvas.toDataURL('image/webp'))
 
             @video.pause()
-            # Doesn't do anything in Chrome.
-            @localMediaStream.stop()
 
             # Decode QR code
             @decode()
