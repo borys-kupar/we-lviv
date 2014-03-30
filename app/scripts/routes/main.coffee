@@ -49,7 +49,7 @@ define [
         storyCollection = new StoryCollection()
 
         $( ".header-placement" ).html( new AdminHeaderView().render().el )
-        Presenter.show( $( "#content" ).html( new StoryCollectionView( model: storyCollection ).el ) )
+        $( "#content" ).html( new StoryCollectionView( model: storyCollection ).el )
 
         storyCollection.fetch( reset: true )
 
