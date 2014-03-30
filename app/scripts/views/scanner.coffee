@@ -84,19 +84,23 @@ define [
             # Doesn't do anything in Chrome.
             @localMediaStream.stop()
         catch e
-            alert "Can't read qr code. Please try to scan code again."
+            alert e
+            # alert "Can't read qr code. Please try to scan code again."
             @video.play()
 
     decodeQRCodeCallback: (data) ->
-        Backbone.history.navigate( "stories/" + data )
+        Backbone.history.navigate( "stories/" + data, trigger: true )
 
     sizeCanvas: ->
         # video.onloadedmetadata not firing in Chrome. See crbug.com/110938.
         setTimeout( =>
-            @canvas.width = @video.videoWidth
-            @canvas.height = @video.videoHeight
-            @img.height = @video.videoHeight
-            @img.width = @video.videoWidth
+            # alert @video.videoWidth
+            # @canvas.width = @video.videoWidth
+            # @canvas.height = @video.videoHeight
+            @canvas.width = 450
+            @canvas.height = 600
+            # @img.height = @video.videoHeight
+            # @img.width = @video.videoWidth
         , 50)
 
     snapshot: ->

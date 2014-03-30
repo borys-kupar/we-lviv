@@ -13,7 +13,7 @@ define [
         @listenTo( @model, "reset", @render )
         @userLang = utils.get('language', 'en');
 
-    render:->
+    render: ->
         @$el.html( @template( collection: @model.toJSON(), language: @userLang ) )
 
         return this

@@ -37,6 +37,7 @@ require.config
       ]
   paths:
     'jquery': '../bower_components/jquery/dist/jquery'
+    'hostMapping': 'vendor/hostMapping'
     "jquery.serializeObject": "../bower_components/jQuery.serializeObject/jquery.serializeObject"
     'backbone': '../bower_components/backbone/backbone'
     'backbone-validation': '../bower_components/backbone-validation/dist/backbone-validation-amd'

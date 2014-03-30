@@ -1,11 +1,12 @@
 define [
   'underscore'
   'backbone'
-], (_, Backbone) ->
+  'hostMapping'
+], (_, Backbone, hostMapping) ->
   'use strict';
 
   class StoryModel extends Backbone.Model
-      urlRoot: "http://localhost:8000/stories"
+      urlRoot: hostMapping.getHostName('api') + "/stories"
 
       idAttribute: "_id"
 

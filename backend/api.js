@@ -15,7 +15,7 @@ var restify       = require('restify')
 ,   stories       = db.collection('stories')
 ;
 
-var ip_addr = 'localhost';
+var ip_addr = '0.0.0.0';
 var port    =  '8000';
 
 var server = restify.createServer({
@@ -44,7 +44,8 @@ server.use(function(req,res,next){
 });
 
 function corsHandler(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9000');
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9000');
+    res.setHeader('Access-Control-Allow-Origin', 'http://192.168.100.98:9000');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Response-Time, X-PINGOTHER, X-CSRF-Token, Cache-Control, X-Requested-With');
     res.setHeader('Access-Control-Allow-Methods', 'PUT, DELETE, POST');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -110,7 +111,7 @@ function checkAccess(req, res, next) {
 }
 
 function findAllStories(req, res , next) {
-    res.setHeader('Access-Control-Allow-Origin','*');
+    // res.setHeader('Access-Control-Allow-Origin','*');
     stories.aggregate([publicProjection] , function(err , success) {
         if (err) { console.log('Response error ' , err); }
         if(success) {
@@ -123,7 +124,7 @@ function findAllStories(req, res , next) {
 }
 
 function findStory(req, res , next) {
-    res.setHeader('Access-Control-Allow-Origin','*');
+    // res.setHeader('Access-Control-Allow-Origin','*');
     stories.findOne({_id:db.ObjectId(req.params.storyId)} , function(err , success) {
         //console.log('Response success ' , success);
         if (err) { console.log('Response error ' , err); }

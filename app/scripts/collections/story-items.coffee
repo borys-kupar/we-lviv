@@ -2,8 +2,9 @@ define [
   'underscore'
   'backbone'
   '../models/story'
-], (_, Backbone, StoryModel) ->
+  'hostMapping'
+], (_, Backbone, StoryModel, hostMapping) ->
 
   class StoryItemsCollection extends Backbone.Collection
-    url : "http://localhost:8000/stories"
+    url: hostMapping.getHostName('api') + "/stories"
     model: StoryModel
