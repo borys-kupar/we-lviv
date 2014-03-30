@@ -97,6 +97,9 @@ function setStory(req , res , next) {
 
     story.title = req.params.title;
     story.description = req.params.description;
+    story.image = req.params.image;
+    story.video = req.params.video;
+    story.audio = req.params.audio;
 
     stories.update( { _id:db.ObjectId(req.params.storyId) }, story, function(err , success) {
         console.log('Response success ' , success);

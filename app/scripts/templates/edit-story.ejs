@@ -1,6 +1,6 @@
 <div class="titles">
   <a href="#admin"><p class="back"><i class="fa fa-arrow-circle-o-left"></i> Back</p></a>
-  <h3><i class="fa fa-edit"></i> Edit story / <%= title %></h3>
+  <h3><i class="fa fa-edit"></i> Edit story / <%= model.title %></h3>
 </div>
 <form id="edit-story">
   <div class="row">
@@ -8,17 +8,52 @@
         <div class="row">
           <div class="large-12 columns">
             <label>Story Title
-              <input type="text" name="title" placeholder="Title of your story" value="<%= title %>" />
+              <input type="text" name="title" placeholder="Title of your story" value="<%= model.title %>" />
             </label>
           </div>
         </div>
         <div class="row">
           <div class="large-12 columns">
             <label>Description
-              <textarea style="height:200px" name="description" placeholder="Your story goes here..."><%= description %></textarea>
+              <textarea style="height:200px" name="description" placeholder="Your story goes here..."><%= model.description %></textarea>
             </label>
           </div>
         </div>
+        <div class="row">
+          <div class="large-12 columns">
+            <label>Image url ( optional )
+              <input type="text" name="image" placeholder="Image link attached to the story" <% if( model.image ){ %> value="<%=model.image %>" <% } %> />
+            </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <div style="text-align: center;" class="image-container">
+                <% if( model.image ){ %>
+                <image src="<%= model.image %>"/>
+                <% } %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <label>Video url ( optional )
+              <input type="text" name="video" placeholder="Video link attached to the story" <% if( video ){ %> value="<%=model.video %>" <% } %> />
+            </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="large-12 columns video-container">
+            <% if( video ){ %>
+            <iframe class='youtube-player' type='text/html' width='100%' height='385' src='http://www.youtube.com/embed/<%= video %>' allowfullscreen frameborder='0'>
+            </iframe>
+            <% } %>
+          </div>
+        </div>
+
         <div class="row">
           <div class="large-12 columns">
              <input type="submit" class="button success" value="Save"/>

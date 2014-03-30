@@ -42,9 +42,9 @@ define [
             localStorage.removeItem( key )
 
 
-        getQueryParams:( paramName ) ->
+        getQueryParams:( link ,paramName ) ->
             vars = []
-            hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&')
+            hashes = link.slice(link.indexOf('?') + 1).split('&')
 
             for i in [0..hashes.length]
                 if hashes[i]

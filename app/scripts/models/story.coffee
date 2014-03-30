@@ -9,6 +9,11 @@ define [
 
       idAttribute: "_id"
 
+      defaults:
+        video : false
+        audio: false
+        image: false
+
       validation:
           title:
               required: true
