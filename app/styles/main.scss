@@ -25,7 +25,7 @@ body {
 }
 
 @media print {
-    header, .edit-form, .titles {
+    header, .edit-form, .titles, .tabs {
         display: none;
     }
     /*.qr-code-print {
@@ -180,6 +180,7 @@ select.ua {
 .blue_btn span, .red_btn span {
     display: inline-block;
     width: 75%;
+    line-height: 34px;
     text-align: center;
 }
 /*END OF BUTTONS*/
@@ -202,8 +203,8 @@ select.ua {
     }
 
     .scanner-header {
+        margin-bottom: 40px;
         text-align: center;
-
         p {
             width: 250px;
             font-size: 13px;
