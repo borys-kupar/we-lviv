@@ -10,7 +10,7 @@
       <tbody>
         <% _.each(collection, function(story) { %>
         <tr>
-          <td><%= story.title %></td>
+          <td><%= story.en.title %></td>
           <td>
             <a href="#admin/edit-story/<%= story._id %>"><i class="fa fa-edit fa-lg"></i></a>
             <i class="fa fa-minus-circle fa-lg" id="<%= story._id %>"></i>

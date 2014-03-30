@@ -2,47 +2,61 @@
   <a href="#admin"><p class="back"><i class="fa fa-arrow-circle-o-left"></i> Back</p></a>
   <h3><i class="fa fa-plus-square"></i> Add story</h3>
 </div>
+<dl class="tabs" data-tab>
+  <% _.each(languages, function(language, key) { %>
+  <dd <% if(key == 0) { %>
+        class="active"
+      <% } %>
+    ><a href="#panel-<%= language %>"><%= language %></a>
+  </dd>
+  <% }); %>
+</dl>
 <form id="add-story">
-    <div class="row">
-    <div class="large-12 columns">
-      <label>Story Title
-        <input type="text" name="title" placeholder="Title of your story" />
-      </label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <label>Description
-        <textarea style="height:200px" name="description" placeholder="Your story goes here..."></textarea>
-      </label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <label>Image url ( optional )
-        <input type="text" name="image" placeholder="Image link attached to the story" />
-      </label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <div style="text-align: center;" class="image-container">
+  <div class="tabs-content">
+    <% _.each(languages, function(language, key) { %>
+      <div class="content <% if(key == 0) { %>active<% } %>" id="panel-<%= language %>">
+        <div class="row">
+          <div class="large-12 columns">
+            <label>Story Title
+              <input type="text" name="<%= language %>[title]" placeholder="Title of your story" />
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-12 columns">
+            <label>Description
+              <textarea style="height:200px" name="<%= language %>[description]" placeholder="Your story goes here..."></textarea>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-12 columns">
+            <label>Image url ( optional )
+              <input type="text" name="<%= language %>[image]" placeholder="Image link attached to the story" />
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-12 columns">
+            <div style="text-align: center;" class="image-container">
 
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-12 columns">
+            <label>Video url ( optional )
+              <input type="text" name="<%= language %>[video]" placeholder="Video link attached to the story" />
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-12 columns video-container">
+
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <label>Video url ( optional )
-        <input type="text" name="video" placeholder="Video link attached to the story" />
-      </label>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns video-container">
-
-    </div>
+    <% }); %>
   </div>
 
   <div class="row">

@@ -75,8 +75,8 @@ server.del ( {path: PATH +'/:storyId', version: '0.0.1'} , deleteStory );
 
 var publicProjection = {
   "$project" : {
-    "title" : 1,
-    "description" : 1
+    "en" : 1,
+    "ua" : 1
   }
 };
 
@@ -139,18 +139,14 @@ function updateStory(req, res, next) {
     checkAccess(req, res, next);
 
     var story = {};
-
-    story.title = req.params.title;
-    story.description = req.params.description;
-    story.image = req.params.image;
-    story.video = req.params.video;
-    story.audio = req.params.audio;
+    story.en = req.params.en;
+    story.ua = req.params.ua;
 
     stories.update( { _id:db.ObjectId(req.params.storyId) }, story, function(err , success) {
         // console.log('Response success ' , success);
         if (err) { console.log('Response error ' , err); }
         if(success) {
-            res.send(201 , req.params);
+            res.send(200, req.params);
             return next();
         } else {
             return next(err);
