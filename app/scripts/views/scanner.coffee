@@ -3,7 +3,8 @@ define [
   'underscore'
   'backbone'
   'templates'
-], ($, _, Backbone, JST) ->
+  'core/utils'
+], ($, _, Backbone, JST, utils) ->
   class ScannerView extends Backbone.View
     className: "scanner-view"
     template: JST['app/scripts/templates/scanner.ejs']
@@ -123,3 +124,4 @@ define [
 
     changeLanguage: (e) ->
         @$( 'select' ).attr('class', $(e.target).val() )
+        utils.set('language', $(e.target).val() )
