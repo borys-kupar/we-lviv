@@ -11,7 +11,7 @@ define [
 
     initialize: ->
         @listenTo( @model, "change", @render )
-        @userLang = "en"
+        @userLang = utils.get('language', 'en');
 
     render: ->
       if @model.get( @userLang ).video

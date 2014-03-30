@@ -48,10 +48,11 @@ define [
     showVideo: ( e )->
         link = $( e.target ).val()
         videoId = utils.getQueryParams( link, 'v' )
+        $videoContainer = $( e.target ).parents('.content').find('.video-container')
         if ( not videoId ) or ( link is "" )
-          @$( ".video-container" ).empty()
+          $videoContainer.empty()
         else
-          @$( ".video-container" ).html( "<iframe class='youtube-player' type='text/html' width='100%' height='385' src='http://www.youtube.com/embed/"+videoId+"' allowfullscreen frameborder='0'>
+          $videoContainer.html( "<iframe class='youtube-player' type='text/html' width='100%' height='385' src='http://www.youtube.com/embed/"+videoId+"' allowfullscreen frameborder='0'>
           </iframe>" )
 
     showImage: ( e )->

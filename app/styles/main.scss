@@ -293,3 +293,24 @@ table {
     }
 
 }
+
+.catalog {
+    .story{
+        width: 96%;
+        margin: 0 auto;
+        padding: rem-calc( 5 15 15 15 );
+        border-bottom: solid 1px #b4b4b4;
+        text-align: left;
+        .title {
+            display: inline-block;
+            width: 100%;
+            font-size: rem-calc( 24 );
+        }
+    }
+    .row:last-child {
+        .story {
+            border-bottom: none;
+            margin-bottom: rem-calc(20);
+        }
+    }
+}
