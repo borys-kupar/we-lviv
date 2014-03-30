@@ -14,8 +14,6 @@ define [
         @userLang = utils.get('language', 'en');
 
     render:->
-        console.log @model.toJSON()
-        console.log @userLang
         @$el.html( @template( collection: @model.toJSON(), language: @userLang ) )
 
         return this

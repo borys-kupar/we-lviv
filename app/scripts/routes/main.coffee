@@ -11,7 +11,8 @@ define [
   '../views/login'
   '../views/catalog'
   'core/utils'
-], ( Backbone, StoryCollectionView, AddStoryView, EditStoryView, ScannerView, AdminHeaderView, StoryView, StoryModel, StoryCollection, LoginView, CatalogView, utils ) ->
+  '../core/presenter'
+], ( Backbone, StoryCollectionView, AddStoryView, EditStoryView, ScannerView, AdminHeaderView, StoryView, StoryModel, StoryCollection, LoginView, CatalogView, utils, Presenter ) ->
 
   class MainRouter extends Backbone.Router
     routes:
@@ -48,7 +49,7 @@ define [
         storyCollection = new StoryCollection()
 
         $( ".header-placement" ).html( new AdminHeaderView().render().el )
-        $( "#content" ).html( new StoryCollectionView( model: storyCollection ).el )
+        Presenter.show( $( "#content" ).html( new StoryCollectionView( model: storyCollection ).el ) )
 
         storyCollection.fetch( reset: true )
 

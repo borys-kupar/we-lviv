@@ -18,7 +18,7 @@ define [
           videoId = @createYoutubeEmbedCode( @model.get( @userLang ).video )
         else
           videoId = false
-        console.log @model
+
         @$el.html( @template( model: @model.toJSON(), video_id: videoId, language: @userLang ) )
 
         return this
