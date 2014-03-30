@@ -250,6 +250,8 @@ table {
 
 .story-view {
     .header-image{
+        height: rem-calc(200);
+        overflow: hidden;
         position: relative;
         .back {
             position: absolute;
@@ -261,8 +263,6 @@ table {
         }
         img {
             width: 100%;
-            max-height: rem-calc(200);
-            overflow: hidden;
         }
     }
     .story-title {

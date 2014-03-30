@@ -14,8 +14,8 @@ define [
 
     events:
         "submit #add-story": "saveStory"
-        "change input[name=video]": "showVideo"
-        "change input[name=image]": "showImage"
+        "change input[name$='[video]']": "showVideo"
+        "change input[name$='[image]']": "showImage"
 
     initialize: ( params )->
         @model = new StoryModel()
@@ -56,11 +56,11 @@ define [
 
     showImage: ( e )->
         link = $( e.target ).val()
-
+        $imageContainer = $( e.target ).parents('.content').find('.image-container')
         if link is ""
-            @$( ".video-container" ).empty()
+            $imageContainer.empty()
         else
-            @$( ".image-container" ).html( "<image src="+link+">" )
+            $imageContainer.html( "<image src="+link+">" )
 
     saveStory: ( e ) ->
       e.preventDefault()

@@ -42,8 +42,8 @@
             <div class="row">
               <div class="large-12 columns">
                 <div style="text-align: center;" class="image-container">
-                    <% if( model.image ){ %>
-                    <image src="<%= model.image %>"/>
+                    <% if( model[language].image ){ %>
+                    <image src="<%= model[language].image %>"/>
                     <% } %>
                 </div>
               </div>
