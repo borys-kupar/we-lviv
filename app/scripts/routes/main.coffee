@@ -9,8 +9,9 @@ define [
   '../models/story'
   '../collections/story-items'
   '../views/login'
+  '../views/catalog'
   'core/utils'
-], ( Backbone, StoryCollectionView, AddStoryView, EditStoryView, ScannerView, AdminHeaderView, StoryView, StoryModel, StoryCollection, LoginView, utils ) ->
+], ( Backbone, StoryCollectionView, AddStoryView, EditStoryView, ScannerView, AdminHeaderView, StoryView, StoryModel, StoryCollection, LoginView, CatalogView, utils ) ->
 
   class MainRouter extends Backbone.Router
     routes:
@@ -22,6 +23,7 @@ define [
         "admin/edit-story/:id": "editStory"
         "scanner": "scanner"
         "stories/:id": "storyView"
+        "catalog" : "catalogView"
 
     initialize: ->
         @on( "route", ->
@@ -76,3 +78,11 @@ define [
         $( "#content" ).html( new StoryView( model: story ).el )
 
         story.fetch()
+
+    catalogView: ->
+        storyCollection = new StoryCollection()
+
+        $( ".header-placement" ).empty()
+        $( "#content" ).html( new CatalogView( model: storyCollection ).el )
+
+        storyCollection.fetch( reset: true )

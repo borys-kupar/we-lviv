@@ -13,8 +13,8 @@ define [
 
     events:
         "submit #edit-story": "saveStory"
-        "change input[name=video]": "showVideo"
-        "change input[name=image]": "showImage"
+        "change input[name$='[video]']": "showVideo"
+        "change input[name$='[image]']": "showImage"
 
     initialize: ( params )->
         @model = params.model
@@ -26,8 +26,8 @@ define [
         # Backbone.Validation.bind( this )
 
     render: ->
-        if @model.get( "video" )
-          videoId = @createYoutubeEmbedCode( @model.get( "video" ) )
+        if @model.get( "en" ).video
+          videoId = @createYoutubeEmbedCode( @model.get( "en" ).video )
         else
           videoId = false
 
@@ -48,7 +48,6 @@ define [
         return videoId
 
     showVideo: ( e )->
-        console.log 'show video'
         link = $( e.target ).val()
         videoId = utils.getQueryParams( link, 'v' )
         if ( not videoId ) or ( link is "" )
@@ -58,13 +57,12 @@ define [
           </iframe>" )
 
     showImage: ( e )->
-        console.log 'show image'
         link = $( e.target ).val()
-        console.log link
+        $imageContainer = $( e.target ).parents('.content').find('.image-container')
         if link is ""
-            @$( ".image-container" ).empty()
+            $imageContainer.empty()
         else
-            @$( ".image-container" ).html( "<image src="+link+">" )
+            $imageContainer.html( "<image src="+link+">" )
 
     saveStory: ( e ) ->
         e.preventDefault()

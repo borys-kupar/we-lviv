@@ -11,14 +11,15 @@ define [
 
     initialize: ->
         @listenTo( @model, "change", @render )
+        @userLang = "en"
 
     render: ->
-      if @model.get( "video" )
-          videoId = @createYoutubeEmbedCode( @model.get( "video" ) )
+      if @model.get( @userLang ).video
+          videoId = @createYoutubeEmbedCode( @model.get( @userLang ).video )
         else
           videoId = false
-
-        @$el.html( @template( model: @model.toJSON(), video_id: videoId ) )
+        console.log @model
+        @$el.html( @template( model: @model.toJSON(), video_id: videoId, language: @userLang ) )
 
         return this
 
