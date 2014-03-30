@@ -16,6 +16,8 @@ define [
         "change input[name$='[video]']": "showVideo"
         "change input[name$='[image]']": "showImage"
 
+    languages: ["en", "ua"]
+
     initialize: ( params )->
         @model = params.model
 
@@ -26,10 +28,13 @@ define [
         # Backbone.Validation.bind( this )
 
     render: ->
-        if @model.get( "en" ).video
-          videoId = @createYoutubeEmbedCode( @model.get( "en" ).video )
-        else
-          videoId = false
+        videoId = []
+        _.each( @languages, ( value, key ) =>
+            if @model.get( value ).video
+              videoId[ value ] = @createYoutubeEmbedCode( @model.get( value ).video )
+            else
+              videoId[ value ] = false
+        )
 
         @$el.html( @template( model: @model.toJSON(), video: videoId, languages: @languages ) )
 
@@ -50,10 +55,11 @@ define [
     showVideo: ( e )->
         link = $( e.target ).val()
         videoId = utils.getQueryParams( link, 'v' )
+        $videoContainer = $( e.target ).parents('.content').find('.video-container')
         if ( not videoId ) or ( link is "" )
-          @$( ".video-container" ).empty()
+          $videoContainer.empty()
         else
-          @$( ".video-container" ).html( "<iframe class='youtube-player' type='text/html' width='100%' height='385' src='http://www.youtube.com/embed/"+videoId+"' allowfullscreen frameborder='0'>
+          $videoContainer.html( "<iframe class='youtube-player' type='text/html' width='100%' height='385' src='http://www.youtube.com/embed/"+videoId+"' allowfullscreen frameborder='0'>
           </iframe>" )
 
     showImage: ( e )->
