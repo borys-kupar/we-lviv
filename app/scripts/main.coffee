@@ -64,5 +64,12 @@ require [
           $el.after( $error )
   )
 
+  # Setup default XHR options
+  #
+  $.ajaxSetup(
+      xhrFields:
+          withCredentials: true
+  )
+
   new Router
   Backbone.history.start()
