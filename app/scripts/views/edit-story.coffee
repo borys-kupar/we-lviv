@@ -8,6 +8,9 @@ define [
   class EditStoryView extends Backbone.View
     template: JST['app/scripts/templates/edit-story.ejs']
 
+    languages: ["en", "ua"]
+    fields: ['title', 'description', 'video', 'image']
+
     events:
         "submit #edit-story": "saveStory"
         "change input[name=video]": "showVideo"
@@ -16,13 +19,11 @@ define [
     initialize: ( params )->
         @model = params.model
 
-        @listenTo( @model, "change", @render )
-
-
+        @listenToOnce( @model, "change", @render )
 
         # Backbone validation
         #
-        Backbone.Validation.bind( this )
+        # Backbone.Validation.bind( this )
 
     render: ->
         if @model.get( "video" )
@@ -30,7 +31,13 @@ define [
         else
           videoId = false
 
-        @$el.html( @template( model: @model.toJSON(), video: videoId) )
+        @$el.html( @template( model: @model.toJSON(), video: videoId, languages: @languages ) )
+
+        @$el.foundation(
+          tab:
+            callback: $.noop()
+        )
+
         new QRCode(document.getElementById("qrcode"), @model.id);
 
         return this
@@ -62,13 +69,23 @@ define [
     saveStory: ( e ) ->
         e.preventDefault()
 
-        @model.set( 'title' ,$( e.target ).find( "input[name=title]" ).val() )
-        @model.set( 'description' ,$( e.target ).find( "textarea[name=description]" ).val() )
-        @model.set( 'video', $( e.target ).find( "input[name=video]" ).val() )
-        @model.set( 'image', $( e.target ).find( "input[name=image]" ).val() )
+        data = $( e.target ).serializeObject()
 
-        if @model.isValid( true )
-            @model.save().then( =>
-                Backbone.history.navigate( "#admin", trigger: true )
-                utils.alert( "Story was successfully edited" )
+        _.each( @languages, ( value ) =>
+            if not data[ value ]
+                data[ value ] = {}
+
+            _.each( @fields, ( field ) =>
+                key = value + "[" + field + "]"
+                data[ value ][ field ] = data[ key ]
+                delete data[ key ]
             )
+        )
+
+        @model.set( data )
+
+        # if @model.isValid( true )
+        @model.save().then( =>
+            Backbone.history.navigate( "#admin", trigger: true )
+            utils.alert( "Story was successfully edited" )
+        )

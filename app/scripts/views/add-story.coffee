@@ -9,6 +9,9 @@ define [
   class AddStoryView extends Backbone.View
     template: JST['app/scripts/templates/add-story.ejs']
 
+    languages: ["en", "ua"]
+    fields: ['title', 'description', 'video', 'image']
+
     events:
         "submit #add-story": "saveStory"
         "change input[name=video]": "showVideo"
@@ -17,12 +20,28 @@ define [
     initialize: ( params )->
         @model = new StoryModel()
 
-        # Backbone validation
-        #
-        Backbone.Validation.bind( this )
+        # _.each( @languages, ( value ) =>
+        #     _.each( @fields, ( field ) =>
+        #         key = value + "[" + field + "]"
+
+        #         if field is "title" or field is "description"
+        #           if not @model.validation[ key ]
+        #             @model.validation[ key ] = {}
+        #             @model.validation[ key ].required = true
+        #     )
+        # )
+
+        # # Backbone validation
+        # #
+        # Backbone.Validation.bind( this )
 
     render: ->
-        @$el.html( @template( @model.toJSON() ) )
+        @$el.html( @template( languages: @languages ) )
+
+        @$el.foundation(
+          tab:
+            callback: $.noop()
+        )
 
         return this
 
@@ -46,14 +65,24 @@ define [
     saveStory: ( e ) ->
       e.preventDefault()
 
-      @model.set( 'title' ,$( e.target ).find( "input[name=title]" ).val() )
-      @model.set( 'description' ,$( e.target ).find( "textarea[name=description]" ).val() )
-      @model.set( 'video', $( e.target ).find( "input[name=video]" ).val() )
-      @model.set( 'image', $( e.target ).find( "input[name=image]" ).val() )
+      data = $( e.target ).serializeObject()
 
-      if @model.isValid( true )
-        @model.save().then( =>
-            Backbone.history.navigate( "#admin/edit-story/" + @model.id, trigger: true )
-            utils.alert( "New story was successfully added" )
-        )
+      _.each( @languages, ( value ) =>
+          if not data[ value ]
+              data[ value ] = {}
+
+          _.each( @fields, ( field ) =>
+              key = value + "[" + field + "]"
+              data[ value ][ field ] = data[ key ]
+              delete data[ key ]
+          )
+      )
+
+      @model.set( data )
+
+      # if @model.isValid( true )
+      @model.save().then( =>
+          Backbone.history.navigate( "#admin/edit-story/" + @model.id, trigger: true )
+          utils.alert( "New story was successfully added" )
+      )
 

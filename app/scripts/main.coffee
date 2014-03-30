@@ -27,8 +27,17 @@ require.config
       deps: [
         "foundation"
       ]
+    "foundation.tab":
+      deps: [
+        "foundation"
+      ]
+    "jquery.serializeObject":
+      deps: [
+        "jquery"
+      ]
   paths:
     'jquery': '../bower_components/jquery/dist/jquery'
+    "jquery.serializeObject": "../bower_components/jQuery.serializeObject/jquery.serializeObject"
     'backbone': '../bower_components/backbone/backbone'
     'backbone-validation': '../bower_components/backbone-validation/dist/backbone-validation-amd'
     'underscore': '../bower_components/underscore/underscore'
@@ -37,6 +46,7 @@ require.config
     "modernizr": "../bower_components/modernizr/modernizr"
     "foundation": "../bower_components/foundation/js/foundation/foundation"
     "foundation.reveal": "../bower_components/foundation/js/foundation/foundation.reveal"
+    "foundation.tab": "../bower_components/foundation/js/foundation/foundation.tab"
 
 require [
   'jquery'
@@ -46,7 +56,9 @@ require [
   'localStorage'
   'qrcode'
   'foundation.reveal'
-], ( $, Backbone, Router , Validation, LocalStorage, qrcode, foundationReveal ) ->
+  'foundation.tab'
+  "jquery.serializeObject"
+], ( $, Backbone, Router , Validation, LocalStorage, qrcode, foundationReveal, foundationTab, jQuerySerializeObject ) ->
 
   # Add custom backbone validation methods
   #
