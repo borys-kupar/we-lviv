@@ -8,17 +8,39 @@ define [
   '../views/view-story'
   '../models/story'
   '../collections/story-items'
-
-], ( Backbone, StoryCollectionView, AddStoryView, EditStoryView, ScannerView, AdminHeaderView, StoryView, StoryModel, StoryCollection ) ->
+  '../views/login'
+  'core/utils'
+], ( Backbone, StoryCollectionView, AddStoryView, EditStoryView, ScannerView, AdminHeaderView, StoryView, StoryModel, StoryCollection, LoginView, utils ) ->
 
   class MainRouter extends Backbone.Router
     routes:
         "": "scanner"
+        "login": "login"
+        "logout": "logout"
         "admin": "adminPage"
         "admin/add-story": "addStory"
         "admin/edit-story/:id": "editStory"
         "scanner": "scanner"
         "stories/:id": "storyView"
+
+    initialize: ->
+        @on( "route", ->
+            # Clean up all messages
+            #
+            utils.clearAlerts()
+        )
+
+    login: ->
+        $( ".header-placement" ).empty()
+        $( "#content" ).html( new LoginView().render().el )
+
+    logout: ->
+        $.ajax(
+            url: "http://localhost:8000/logout"
+            method: "POST"
+        ).then( =>
+            Backbone.history.navigate( "login", trigger: true )
+        ).done()
 
     adminPage: ->
         storyCollection = new StoryCollection()
