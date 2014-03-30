@@ -120,6 +120,8 @@ define [
         @img             = @$('#screenshot')
         @ctx             = @canvas.getContext('2d')
 
+        @$('select[name=language]').val(utils.get('language', 'en')).attr('class', utils.get('language', 'en'))
+
         return this
 
     changeLanguage: (e) ->
