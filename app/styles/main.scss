@@ -25,7 +25,7 @@ body {
 }
 
 @media print {
-    header, .edit-form, .titles {
+    header, .edit-form, .titles, .tabs {
         display: none;
     }
     /*.qr-code-print {
