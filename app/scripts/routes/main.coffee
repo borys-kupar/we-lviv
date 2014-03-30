@@ -69,6 +69,8 @@ define [
         $( "#content" ).html( new ScannerView().render().el )
 
     storyView: ( id ) ->
+        $( ".header-placement" ).empty()
+        $( ".messages" ).remove()
         story = new StoryModel( _id: id )
 
         $( "#content" ).html( new StoryView( model: story ).el )

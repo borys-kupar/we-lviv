@@ -248,3 +248,49 @@ table {
         cursor: pointer;
     }
 }
+
+.story-view {
+    .header-image{
+        position: relative;
+        .back {
+            position: absolute;
+            font-size: rem-calc( 24 );
+            color : #000;
+            opacity: 0.5;
+            top: rem-calc(15);
+            left: rem-calc(15);
+        }
+        img {
+            width: 100%;
+            max-height: rem-calc(200);
+            overflow: hidden;
+        }
+    }
+    .story-title {
+        padding: rem-calc( 5 15 0 15 );
+    }
+    .story-text {
+        padding: rem-calc( 5 15 5 15);
+        text-align: left;
+        line-height: 1.5em;
+    }
+    .story-social {
+        padding: rem-calc( 15 5 5 5);
+        .red_btn {
+            float: left;
+            width: rem-calc(200);
+            font-size: rem-calc(18);
+            i {
+                margin-right: rem-calc(5);
+            }
+            span {
+                width: none;
+            }
+        }
+        .social-links{
+            margin-top: rem-calc(6);
+            float: right;
+        }
+    }
+
+}
