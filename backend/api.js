@@ -102,16 +102,16 @@ function logout(req, res, next) {
     return next();
 }
 
-function checkAccess(req, res, next) {
-
+function needsAuthorize(req, res, next) {
     if(!req.session.logged_in) {
         res.send(401);
         return next();
+    } else {
+        return false;
     }
 }
 
 function findAllStories(req, res , next) {
-    // res.setHeader('Access-Control-Allow-Origin','*');
     stories.aggregate([publicProjection] , function(err , success) {
         if (err) { console.log('Response error ' , err); }
         if(success) {
@@ -124,9 +124,7 @@ function findAllStories(req, res , next) {
 }
 
 function findStory(req, res , next) {
-    // res.setHeader('Access-Control-Allow-Origin','*');
     stories.findOne({_id:db.ObjectId(req.params.storyId)} , function(err , success) {
-        //console.log('Response success ' , success);
         if (err) { console.log('Response error ' , err); }
         if(success) {
             res.send(200 , success);
@@ -137,50 +135,49 @@ function findStory(req, res , next) {
 }
 
 function updateStory(req, res, next) {
-    checkAccess(req, res, next);
+    if(needsAuthorize(req, res, next) === false) {
+        var story = {};
+        story.en = req.params.en;
+        story.ua = req.params.ua;
 
-    var story = {};
-    story.en = req.params.en;
-    story.ua = req.params.ua;
-
-    stories.update( { _id:db.ObjectId(req.params.storyId) }, story, function(err , success) {
-        // console.log('Response success ' , success);
-        if (err) { console.log('Response error ' , err); }
-        if(success) {
-            res.send(200, req.params);
-            return next();
-        } else {
-            return next(err);
-        }
-    });
+        stories.update( { _id:db.ObjectId(req.params.storyId) }, story, function(err , success) {
+            if (err) { console.log('Response error ' , err); }
+            if(success) {
+                res.send(200, req.params);
+                return next();
+            } else {
+                return next(err);
+            }
+        });
+    }
 }
 
 function addStory(req , res , next) {
-    checkAccess(req, res, next);
-
-    stories.save( req.params , function(err , success) {
-        // console.log('Response success ' , success);
-        if (err) { console.log('Response error ' , err); }
-        if(success) {
-            res.send(201 , req.params);
-            return next();
-        } else {
-            return next(err);
-        }
-    });
+    if(needsAuthorize(req, res, next) === false) {
+        stories.save( req.params , function(err , success) {
+            // console.log('Response success ' , success);
+            if (err) { console.log('Response error ' , err); }
+            if(success) {
+                res.send(201 , req.params);
+                return next();
+            } else {
+                return next(err);
+            }
+        });
+    }
 }
 
 function deleteStory(req , res , next) {
-    checkAccess(req, res, next);
-
-    stories.remove({_id:db.ObjectId(req.params.storyId)} , function(err , success) {
-        //console.log('Response success ' , success);
-        if (err) { console.log('Response error ' , err); }
-        if(success) {
-            res.send(204);
-            return next();
-        } else {
-            return next(err);
-        }
-    });
+    if(needsAuthorize(req, res, next) === false) {
+        stories.remove({_id:db.ObjectId(req.params.storyId)} , function(err , success) {
+            //console.log('Response success ' , success);
+            if (err) { console.log('Response error ' , err); }
+            if(success) {
+                res.send(204);
+                return next();
+            } else {
+                return next(err);
+            }
+        });
+    }
 }
