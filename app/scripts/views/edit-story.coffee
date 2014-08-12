@@ -43,7 +43,7 @@ define [
             callback: $.noop()
         )
 
-        new QRCode(document.getElementById("qrcode"), @model.id);
+        new QRCode(document.getElementById("qrcode"), "http://welviv.com/#stories/" + @model.id );
 
         return this
 

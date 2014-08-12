@@ -89,7 +89,7 @@ define [
             @video.play()
 
     decodeQRCodeCallback: (data) ->
-        Backbone.history.navigate( "stories/" + data, trigger: true )
+        window.location = data
 
     sizeCanvas: ->
         # video.onloadedmetadata not firing in Chrome. See crbug.com/110938.
