@@ -5,7 +5,8 @@ define [
   'templates'
   'core/utils'
   'models/user'
-], ($, _, Backbone, JST, utils, User) ->
+  'hostMapping'
+], ($, _, Backbone, JST, utils, User, hostMapping) ->
   class LoginView extends Backbone.View
     template: JST['app/scripts/templates/login.ejs']
 
@@ -37,7 +38,7 @@ define [
 
         if @model.isValid( [ "username", "password" ] )
             $.ajax(
-                url: "http://localhost:8000/login"
+                url: hostMapping.getHostName('api') + "/login"
                 method: "POST"
                 data: data
                 type: "application/json"
