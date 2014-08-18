@@ -14,7 +14,7 @@
         "api": "http://localhost:8000"
       },
       "production": {
-        "api": "http://welviv.com"
+        "api": "http://welviv.com/api"
       }
     });
     HostMapping = (function() {
