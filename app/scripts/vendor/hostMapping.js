@@ -1,5 +1,5 @@
 (function() {
-  define(["vendor/settings"], function(settings) {
+  define(["settings"], function(settings) {
     var HostMapping;
     settings.set("hostMapping", {
       "localhost": "development",

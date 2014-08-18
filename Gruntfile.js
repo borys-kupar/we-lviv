@@ -189,12 +189,15 @@ module.exports = function (grunt) {
                         'jquery': '../../app/bower_components/jquery/dist/jquery',
                         'underscore': '../../app/bower_components/underscore/underscore',
                         'backbone': '../../app/bower_components/backbone/backbone',
+                        'backbone-validation': '../../app/bower_components/backbone-validation/dist/backbone-validation-amd',
+                        'localStorage': '../../app/bower_components/backbone.localStorage/backbone.localStorage',
                         'modernizr': '../../app/bower_components/modernizr/modernizr',
                         'foundation': '../../app/bower_components/foundation/js/foundation/foundation',
                         'foundation.reveal': '../../app/bower_components/foundation/js/foundation/foundation.reveal',
                         'foundation.tab': '../../app/bower_components/foundation/js/foundation/foundation.tab',
                         'hostMapping': '../../app/scripts/vendor/hostMapping',
                         'settings': '../../app/scripts/vendor/settings',
+                        'qrcode': '../../app/scripts/vendor/qrcode',
                         'jquery.serializeObject': '../../app/bower_components/jQuery.serializeObject/jquery.serializeObject'
                     },
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
@@ -356,6 +359,7 @@ module.exports = function (grunt) {
         'coffee',
         'createDefaultTemplate',
         'jst',
+        'compass:dist',
         'useminPrepare',
         'requirejs',
         'imagemin',
