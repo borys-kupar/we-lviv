@@ -186,9 +186,16 @@ module.exports = function (grunt) {
                     optimize: 'none',
                     paths: {
                         'templates': '../../.tmp/scripts/templates',
-                        'jquery': '../../app/bower_components/jquery/jquery',
+                        'jquery': '../../app/bower_components/jquery/dist/jquery',
                         'underscore': '../../app/bower_components/underscore/underscore',
-                        'backbone': '../../app/bower_components/backbone/backbone'
+                        'backbone': '../../app/bower_components/backbone/backbone',
+                        'modernizr': '../../app/bower_components/modernizr/modernizr',
+                        'foundation': '../../app/bower_components/foundation/js/foundation/foundation',
+                        'foundation.reveal': '../../app/bower_components/foundation/js/foundation/foundation.reveal',
+                        'foundation.tab': '../../app/bower_components/foundation/js/foundation/foundation.tab',
+                        'hostMapping': '../../app/scripts/vendor/hostMapping',
+                        'settings': '../../app/scripts/vendor/settings',
+                        'jquery.serializeObject': '../../app/bower_components/jQuery.serializeObject/jquery.serializeObject'
                     },
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
