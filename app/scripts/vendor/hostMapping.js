@@ -4,6 +4,7 @@
     settings.set("hostMapping", {
       "localhost": "development",
       "192.168.100.98": "testing",
+      "welviv.com": "production"
     });
     settings.set("hostConfig", {
       "testing": {
@@ -11,6 +12,9 @@
       },
       "development": {
         "api": "http://localhost:8000"
+      },
+      "production": {
+        "api": "http://welviv.com"
       }
     });
     HostMapping = (function() {
